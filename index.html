@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanji Translator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .output {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #ccc;
+            border-top: 3px solid #333;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        .note {
+            margin-top: 10px;
+            color: red;
+            font-style: italic;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Kanji Translator</h1>
+
+    <input type="text" id="textBox" placeholder="Type something...">
+    <div class="output" id="output"></div>
+    <p class="note">Don't leave spaces!</p>
+
+    <script>
+        const textBox = document.getElementById('textBox');
+        const output = document.getElementById('output');
+
+        const translations = {
+            '遅死': 'Slow Death',
+            '離門': 'Lemon',
+            '牙児囲': 'Honey',
+            '邪簾眠': 'Jasmine',
+            '緒練似': 'Orange',
+            '庵置内邑戸': 'Antidote'
+        };
+
+        let timeoutId;
+
+        textBox.addEventListener('input', () => {
+            const inputText = textBox.value;
+            output.textContent = '';
+
+            // Add a loading spinner
+            const loadingSpinner = document.createElement('div');
+            loadingSpinner.className = 'loading';
+            output.appendChild(loadingSpinner);
+
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                if (translations[inputText]) {
+                    output.textContent = translations[inputText];
+                } else {
+                    output.textContent = '';
+                }
+            }, 1000); // Simulates a delay of 1 second
+        });
+    </script>
+</body>
+</html>
+
